@@ -1,0 +1,14 @@
+# Demo project: 20 invented records. Run from the repository root:
+#   qualcode validate examples/demo/qualcode.yaml --show 3
+#   qualcode examples/demo/qualcode.yaml
+# Relative paths are resolved against this file's directory.
+name: demo
+adapter: ./demo_adapter.py:DemoAdapter
+data:
+  logs: ./logs.jsonl
+annotations: ./annotations/demo.json
+sample:
+  per_source_type: 5
+  seed: 42
+llm:
+  model: gpt-4o-mini

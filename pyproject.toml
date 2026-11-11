@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rag-qualcode"
+version = "0.1.0"
+description = "Qualitative failure-mode analysis for RAG systems: open coding and LLM-assisted axial coding over benchmark traces."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Leonard Dost" }]
+keywords = ["rag", "evaluation", "qualitative-coding", "llm", "benchmark"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+]
+dependencies = [
+    "streamlit>=1.52.0",
+    "pandas>=2.2.2",
+    "pyyaml>=6.0",
+    "openai>=1.55.3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.urls]
+Homepage = "https://github.com/ledostxx/rag-qualcode"
+Repository = "https://github.com/ledostxx/rag-qualcode"
+
+[project.scripts]
+qualcode = "rag_qualcode.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

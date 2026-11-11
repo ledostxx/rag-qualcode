@@ -1,0 +1,48 @@
+# rag-qualcode project configuration.
+# Copy to qualcode.yaml, adjust paths, then launch with:  qualcode
+# Check an adapter without starting the GUI:             qualcode validate
+# Relative paths are resolved against this file's directory.
+# Every key is explained in docs/project-file.md.
+#
+# A project file runs Python: an adapter given as a file path is executed when the
+# project is opened. Open only projects you trust.
+
+name: grains-1k
+
+# Which adapter reads your logs. Two forms:
+adapter: grains                       # a built-in adapter, by name
+# adapter: ./my_adapter.py:MyAdapter  # your own, as <file>.py:<ClassName>
+
+# Paths the adapter needs. The keys depend on the adapter. These are the keys of
+# the built-in GRAINS adapter; an adapter of your own defines its own.
+data:
+  # Benchmark results, one JSON record per line. Using the SAS-augmented
+  # variant adds sas_score to the per-record metrics.
+  results: /path/to/grains_eval_1k_sas.jsonl
+  # Optional: precomputed evidence-hit diagnostics (token overlap between
+  # ground-truth chunk and retrieved items), keyed by record id.
+  evidence_hits: /path/to/grains_evidence_hits.json
+  # Optional: directory with one <record_id>.json per record for lazy trace loading.
+  traces_dir: /path/to/grains_traces_split
+  # Optional: benchmark ground-truth CSV (doc_hash, text, title, url).
+  ground_truth_csv: /path/to/final_sample.csv
+  # Optional: JSON mapping record id -> list of ground-truth chunk texts. Enables
+  # the passage-level badges ("Ground-truth passage", "Ground-truth candidate").
+  gold_chunk_texts: /path/to/gold_chunk_texts.json
+
+# Where annotations, the drawn sample, and the codebook are stored.
+annotations: ./annotations/grains-1k.json
+
+# Stratified sample for the open-coding phase.
+sample:
+  per_source_type: 20
+  seed: 42
+
+# Model for axial coding. The API key is never stored here: set OPENAI_API_KEY in
+# the environment or type it into the sidebar.
+llm:
+  model: gpt-4o-mini
+  temperature: 0.2
+  # Optional: any OpenAI-compatible endpoint. Without it the client's own
+  # OPENAI_BASE_URL environment variable applies.
+  # base_url: http://localhost:11434/v1

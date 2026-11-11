@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1" # Mondays 06:00 UTC, newest dependency versions
+
+jobs:
+  lowest:
+    name: Python 3.11, lowest dependency versions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+      - uses: astral-sh/setup-uv@v7
+      - name: Install the lowest allowed versions of the direct dependencies
+        run: uv pip install --system --resolution lowest-direct -e ".[dev]"
+      - name: Tests
+        run: pytest
+      - name: Validate the demo project
+        run: qualcode validate examples/demo/qualcode.yaml
+
+  newest:
+    name: Python 3.14, newest dependency versions
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+      - name: Install the newest versions
+        run: pip install -e ".[dev]"
+      - name: Tests
+        run: pytest
+      - name: Validate the demo project
+        run: qualcode validate examples/demo/qualcode.yaml

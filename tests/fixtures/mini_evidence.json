@@ -1,0 +1,4 @@
+{
+ "aaa111": {"best_overlap": 0.62, "best_rank": 1, "best_doc_id": "media_1", "n_items": 1, "gt_available": true},
+ "bbb222": {"best_overlap": 0.05, "best_rank": null, "best_doc_id": null, "n_items": 0, "gt_available": true}
+}

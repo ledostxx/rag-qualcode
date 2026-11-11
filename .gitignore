@@ -1,0 +1,12 @@
+# local project config + working data (commit qualcode.example.yaml instead)
+/qualcode.yaml
+annotations/
+
+.venv/
+.venv*/
+*.pre-*
+*.backup-*
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.DS_Store

@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "rag-qualcode"
+type: software
+version: 0.1.0
+date-released: 2026-11-11
+license: MIT
+repository-code: "https://github.com/ledostxx/rag-qualcode"
+authors:
+  - family-names: Dost
+    given-names: Leonard
+abstract: >-
+  A Streamlit app for the qualitative failure analysis of RAG
+  (retrieval-augmented generation) systems. A reviewer reads benchmark traces
+  one at a time and writes free-text observations (open coding). An LLM then
+  proposes failure categories from the notes, which the reviewer edits, assigns
+  and freezes as a codebook (axial coding). A small adapter file translates
+  each system's logs into a common record format.
+keywords:
+  - rag
+  - evaluation
+  - qualitative-coding
+  - llm

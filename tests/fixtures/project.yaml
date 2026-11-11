@@ -1,0 +1,14 @@
+name: fixture-project
+adapter: grains
+data:
+  results: mini_results.jsonl
+  evidence_hits: mini_evidence.json
+  traces_dir: traces
+  ground_truth_csv: mini_ground_truth.csv
+  gold_chunk_texts: gold_chunk_texts.json
+annotations: ./out/annotations.json
+sample:
+  per_source_type: 1
+  seed: 7
+seed_codes:
+  - wrong-retriever
