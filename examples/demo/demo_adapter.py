@@ -2,7 +2,7 @@
 
 Copy this file to connect your own system. Every place you change is marked
 CHANGE. The adapter is one file: helper files next to it cannot be imported.
-Field meanings are documented in src/rag_qualcode/schema.py.
+Field meanings are documented in src/ragnostics/schema.py.
 """
 
 from __future__ import annotations
@@ -11,8 +11,8 @@ import json
 from pathlib import Path
 from typing import Any
 
-from rag_qualcode.adapters.base import Adapter, Level
-from rag_qualcode.schema import GroundTruth, Record, RetrievalEvent, RetrievedSource
+from ragnostics.adapters.base import Adapter, Level
+from ragnostics.schema import GroundTruth, Record, RetrievalEvent, RetrievedSource
 
 
 def _norm(text: str) -> str:

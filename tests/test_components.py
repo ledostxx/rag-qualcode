@@ -2,7 +2,7 @@
 
 import pytest
 
-from rag_qualcode.ui.components import _color, level_from_words
+from ragnostics.ui.components import _color, level_from_words
 
 
 @pytest.mark.parametrize(

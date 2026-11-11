@@ -21,7 +21,7 @@ jobs:
       - name: Tests
         run: pytest
       - name: Validate the demo project
-        run: qualcode validate examples/demo/qualcode.yaml
+        run: ragnostics validate examples/demo/ragnostics.yaml
 
   newest:
     name: Python 3.14, newest dependency versions
@@ -36,4 +36,4 @@ jobs:
       - name: Tests
         run: pytest
       - name: Validate the demo project
-        run: qualcode validate examples/demo/qualcode.yaml
+        run: ragnostics validate examples/demo/ragnostics.yaml

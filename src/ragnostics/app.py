@@ -1,6 +1,6 @@
-"""Streamlit entry point. Launched via the ``qualcode`` CLI (preferred) or:
+"""Streamlit entry point. Launched via the ``ragnostics`` CLI (preferred) or:
 
-    QUALCODE_PROJECT=path/to/qualcode.yaml streamlit run src/rag_qualcode/app.py
+    RAGNOSTICS_PROJECT=path/to/ragnostics.yaml streamlit run src/ragnostics/app.py
 """
 
 from __future__ import annotations
@@ -10,19 +10,19 @@ from pathlib import Path
 
 import streamlit as st
 
-from rag_qualcode.adapters import resolve_adapter_class
-from rag_qualcode.adapters.base import Adapter
-from rag_qualcode.config import ProjectConfig, load_project
-from rag_qualcode.loading import adapter_mtime, adapter_spec, load_records
-from rag_qualcode.schema import Record
-from rag_qualcode.storage import AnnotationStore
-from rag_qualcode.ui import axial_coding, open_coding
+from ragnostics.adapters import resolve_adapter_class
+from ragnostics.adapters.base import Adapter
+from ragnostics.config import ProjectConfig, load_project
+from ragnostics.loading import adapter_mtime, adapter_spec, load_records
+from ragnostics.schema import Record
+from ragnostics.storage import AnnotationStore
+from ragnostics.ui import axial_coding, open_coding
 
-st.set_page_config(page_title="rag-qualcode", page_icon="🧬", layout="wide")
+st.set_page_config(page_title="ragnostics", page_icon="🧬", layout="wide")
 
 
 def _project_path() -> str:
-    return os.environ.get("QUALCODE_PROJECT", "qualcode.yaml")
+    return os.environ.get("RAGNOSTICS_PROJECT", "ragnostics.yaml")
 
 
 def _cache_key(cfg: ProjectConfig) -> str:
@@ -76,7 +76,7 @@ def main() -> None:
 
     store = AnnotationStore(cfg.annotations_path)
 
-    st.sidebar.title("rag-qualcode")
+    st.sidebar.title("ragnostics")
     st.sidebar.caption(
         f"Project **{cfg.name}** · adapter `{cfg.adapter}` · {len(records)} records"
     )

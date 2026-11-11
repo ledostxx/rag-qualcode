@@ -6,7 +6,7 @@ from unittest.mock import MagicMock, patch
 import openai
 import pytest
 
-from rag_qualcode.ui import axial_coding
+from ragnostics.ui import axial_coding
 
 
 def _completion(text: str):

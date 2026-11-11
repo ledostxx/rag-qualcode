@@ -5,16 +5,16 @@ from pathlib import Path
 
 import pytest
 
-from rag_qualcode.adapters import AdapterLoadError, get_adapter, resolve_adapter_class
-from rag_qualcode.adapters.base import Adapter
-from rag_qualcode.adapters.grains import GrainsAdapter
+from ragnostics.adapters import AdapterLoadError, get_adapter, resolve_adapter_class
+from ragnostics.adapters.base import Adapter
+from ragnostics.adapters.grains import GrainsAdapter
 
 REPO = Path(__file__).parent.parent
 DEMO_DIR = REPO / "examples" / "demo"
 
 _MINIMAL = '''
-from rag_qualcode.adapters.base import Adapter
-from rag_qualcode.schema import Record
+from ragnostics.adapters.base import Adapter
+from ragnostics.schema import Record
 
 
 class {name}(Adapter):
@@ -26,7 +26,7 @@ class {name}(Adapter):
 
 
 def _user_modules() -> set[str]:
-    return {m for m in sys.modules if m.startswith("rag_qualcode_user_adapter_")}
+    return {m for m in sys.modules if m.startswith("ragnostics_user_adapter_")}
 
 
 def test_demo_adapter_loads_relative_to_project_folder():

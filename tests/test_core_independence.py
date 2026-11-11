@@ -2,11 +2,11 @@
 
 from pathlib import Path
 
-from rag_qualcode.adapters import get_adapter
-from rag_qualcode.config import load_project
+from ragnostics.adapters import get_adapter
+from ragnostics.config import load_project
 
 FIXTURES = Path(__file__).parent / "fixtures"
-SRC = Path(__file__).parent.parent / "src" / "rag_qualcode"
+SRC = Path(__file__).parent.parent / "src" / "ragnostics"
 HAND_KEPT = ["sas_score", "fusion", "rerank", "hybrid", "gold_chunk", "traces_dir"]
 # "Ground-truth candidate" only appears when a passage is not delivered, which the
 # default fixtures do not produce, so it is listed by hand.

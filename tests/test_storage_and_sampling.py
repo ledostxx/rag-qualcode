@@ -1,8 +1,8 @@
 import json
 
-from rag_qualcode.sampling import stratified_sample
-from rag_qualcode.schema import Record
-from rag_qualcode.storage import AnnotationStore
+from ragnostics.sampling import stratified_sample
+from ragnostics.schema import Record
+from ragnostics.storage import AnnotationStore
 
 
 def _record(rid: str, source_type: str) -> Record:

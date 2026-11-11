@@ -1,5 +1,5 @@
-# local project config + working data (commit qualcode.example.yaml instead)
-/qualcode.yaml
+# local project config + working data (commit ragnostics.example.yaml instead)
+/ragnostics.yaml
 annotations/
 
 .venv/

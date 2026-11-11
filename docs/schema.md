@@ -1,6 +1,6 @@
 # Record format
 
-The app shows one format, the record. An adapter converts one system's logs into records, and the app knows nothing else about the system. The fields and their exact meaning are documented in the docstrings of [src/rag_qualcode/schema.py](../src/rag_qualcode/schema.py), which is the single source. This page explains the concepts and where the app shows each part. It does not repeat the field descriptions.
+The app shows one format, the record. An adapter converts one system's logs into records, and the app knows nothing else about the system. The fields and their exact meaning are documented in the docstrings of [src/ragnostics/schema.py](../src/ragnostics/schema.py), which is the single source. This page explains the concepts and where the app shows each part. It does not repeat the field descriptions.
 
 ## Record
 
@@ -14,7 +14,7 @@ A `Record` is one benchmark question with the system's answer and everything the
 - `ground_truth` is optional. When it has `chunk_text`, the view has a "Ground-truth chunk" section.
 - `extras` is for anything that has no field. The view shows it as a collapsible "System-specific extras" JSON section. Empty values are left out.
 
-`qualcode validate` rejects a list of records that is empty, and records with an empty or duplicate `id` or an empty `question`.
+`ragnostics validate` rejects a list of records that is empty, and records with an empty or duplicate `id` or an empty `question`.
 
 ## Retrieval event and source
 
@@ -48,7 +48,7 @@ Both are merged into one set of badges. When both return the same key, the `trac
 
 `neutral` forces grey even for a word on the list.
 
-**Metrics** are numeric per-record values such as latency or a similarity score. They appear in small text under the badges. Names listed in the adapter's `blind_metrics` are hidden during open coding, so an automatic score does not influence the coder. They stay in the data. `qualcode validate` warns if a name in `blind_metrics` occurs in no record.
+**Metrics** are numeric per-record values such as latency or a similarity score. They appear in small text under the badges. Names listed in the adapter's `blind_metrics` are hidden during open coding, so an automatic score does not influence the coder. They stay in the data. `ragnostics validate` warns if a name in `blind_metrics` occurs in no record.
 
 ## Where each part appears
 

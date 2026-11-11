@@ -1,6 +1,6 @@
 """Adapter registry and loader.
 
-A system is connected by subclassing :class:`~rag_qualcode.adapters.base.Adapter`.
+A system is connected by subclassing :class:`~ragnostics.adapters.base.Adapter`.
 The project file names the adapter either as a built-in name (for example
 ``grains``) or as ``<file>.py:<ClassName>``, which is imported from that file.
 """
@@ -53,7 +53,7 @@ def _load_from_file(spec: str, base_dir: Path | None) -> type[Adapter]:
         raise AdapterLoadError(f"No class name given for adapter file {path}")
 
     digest = hashlib.sha1(str(path).encode("utf-8")).hexdigest()[:8]
-    module_name = f"rag_qualcode_user_adapter_{path.stem}_{digest}"
+    module_name = f"ragnostics_user_adapter_{path.stem}_{digest}"
     module_spec = importlib.util.spec_from_file_location(module_name, path)
     if module_spec is None or module_spec.loader is None:
         raise AdapterLoadError(f"Cannot import adapter file {path} (class '{class_name}')")
@@ -75,7 +75,7 @@ def _load_from_file(spec: str, base_dir: Path | None) -> type[Adapter]:
         raise AdapterLoadError(f"Class '{class_name}' not found in adapter file {path}")
     if not (isinstance(cls, type) and issubclass(cls, Adapter)):
         raise AdapterLoadError(
-            f"'{class_name}' in {path} is not a subclass of rag_qualcode.adapters.base.Adapter"
+            f"'{class_name}' in {path} is not a subclass of ragnostics.adapters.base.Adapter"
         )
     return cls
 

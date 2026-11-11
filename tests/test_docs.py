@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from rag_qualcode.schema import GroundTruth, Record, RetrievalEvent, RetrievedSource
+from ragnostics.schema import GroundTruth, Record, RetrievalEvent, RetrievedSource
 
 REPO = Path(__file__).parent.parent
 

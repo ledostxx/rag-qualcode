@@ -1,4 +1,4 @@
-"""``qualcode validate``: problems, warnings, exit codes and the demo."""
+"""``ragnostics validate``: problems, warnings, exit codes and the demo."""
 
 import subprocess
 import sys
@@ -6,11 +6,11 @@ from pathlib import Path
 
 import pytest
 
-from rag_qualcode import cli
+from ragnostics import cli
 
 FIXTURES = Path(__file__).parent / "fixtures"
 REPO = Path(__file__).parent.parent
-DEMO = REPO / "examples" / "demo" / "qualcode.yaml"
+DEMO = REPO / "examples" / "demo" / "ragnostics.yaml"
 
 
 def _project(tmp_path: Path, cls: str) -> Path:
@@ -95,7 +95,7 @@ def test_trace_signal_keys_empty_when_no_records_shown(capsys):
 
 def test_console_script_exit_code_on_demo():
     result = subprocess.run(
-        [sys.executable, "-m", "rag_qualcode.cli", "validate", str(DEMO)],
+        [sys.executable, "-m", "ragnostics.cli", "validate", str(DEMO)],
         capture_output=True, text=True, cwd=REPO,
     )
     assert result.returncode == 0, result.stdout + result.stderr

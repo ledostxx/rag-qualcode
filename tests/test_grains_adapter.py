@@ -2,9 +2,9 @@ import copy
 import json
 from pathlib import Path
 
-from rag_qualcode.adapters import get_adapter
-from rag_qualcode.config import load_project
-from rag_qualcode.schema import validate_records
+from ragnostics.adapters import get_adapter
+from ragnostics.config import load_project
+from ragnostics.schema import validate_records
 
 FIXTURES = Path(__file__).parent / "fixtures"
 

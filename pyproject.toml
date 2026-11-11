@@ -3,8 +3,8 @@ requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "rag-qualcode"
-version = "0.1.0"
+name = "ragnostics"
+version = "0.2.0"
 description = "Qualitative failure-mode analysis for RAG systems: open coding and LLM-assisted axial coding over benchmark traces."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -30,11 +30,11 @@ dependencies = [
 dev = ["pytest>=8.0"]
 
 [project.urls]
-Homepage = "https://github.com/ledostxx/rag-qualcode"
-Repository = "https://github.com/ledostxx/rag-qualcode"
+Homepage = "https://github.com/ledostxx/ragnostics"
+Repository = "https://github.com/ledostxx/ragnostics"
 
 [project.scripts]
-qualcode = "rag_qualcode.cli:main"
+ragnostics = "ragnostics.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

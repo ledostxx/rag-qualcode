@@ -1,8 +1,8 @@
 # Project file
 
-A project is one YAML file. `qualcode <file>` starts the app on it, and `qualcode validate <file>` checks it. Without an argument both look for `qualcode.yaml` in the current folder. [qualcode.example.yaml](../qualcode.example.yaml) is a commented template, and [examples/demo/qualcode.yaml](../examples/demo/qualcode.yaml) is the demo project.
+A project is one YAML file. `ragnostics <file>` starts the app on it, and `ragnostics validate <file>` checks it. Without an argument both look for `ragnostics.yaml` in the current folder. [ragnostics.example.yaml](../ragnostics.example.yaml) is a commented template, and [examples/demo/ragnostics.yaml](../examples/demo/ragnostics.yaml) is the demo project.
 
-**A project file runs code.** When `adapter` is a file path, that Python file is executed when the app or `qualcode validate` opens the project. A shared or downloaded project folder can contain malicious code. Treat a project file like a script, and open only projects you trust.
+**A project file runs code.** When `adapter` is a file path, that Python file is executed when the app or `ragnostics validate` opens the project. A shared or downloaded project folder can contain malicious code. Treat a project file like a script, and open only projects you trust.
 
 ## Keys
 

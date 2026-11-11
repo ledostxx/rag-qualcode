@@ -1,14 +1,14 @@
 # Writing an adapter
 
-An adapter is a Python class that reads one system's benchmark logs and returns a list of records in the [common record format](schema.md). The app and `qualcode validate` only ever see those records.
+An adapter is a Python class that reads one system's benchmark logs and returns a list of records in the [common record format](schema.md). The app and `ragnostics validate` only ever see those records.
 
 ## Start from the demo
 
 [examples/demo/demo_adapter.py](../examples/demo/demo_adapter.py) is a complete small adapter for a flat JSONL log. Copy it, rename the class, and change every place marked `CHANGE`. The minimum is a subclass of `Adapter` with a `load()` method:
 
 ```python
-from rag_qualcode.adapters.base import Adapter
-from rag_qualcode.schema import Record, RetrievalEvent, RetrievedSource
+from ragnostics.adapters.base import Adapter
+from ragnostics.schema import Record, RetrievalEvent, RetrievedSource
 
 
 class MyAdapter(Adapter):
@@ -30,7 +30,7 @@ data:
   logs: ./my_logs.jsonl
 ```
 
-The file path is resolved against the project file's folder. The app and `qualcode validate` import the file, so everything at the top level of the file runs. The class must be a subclass of `Adapter`, or loading fails with a message that names the file and the class. Treat a project file like a script and open only projects you trust.
+The file path is resolved against the project file's folder. The app and `ragnostics validate` import the file, so everything at the top level of the file runs. The class must be a subclass of `Adapter`, or loading fails with a message that names the file and the class. Treat a project file like a script and open only projects you trust.
 
 An adapter is one file. Helper files next to it cannot be imported, so put helper functions in the same file. If you edit the file while the app is open, the app reloads the records on the next interaction.
 
@@ -49,7 +49,7 @@ Only `load()` is required. The rest have defaults. Implement a hook when the mat
 | `signal_level(key, value)` | `None` | a badge should have a colour that the built-in word list does not give. Return `"good"`, `"warn"`, `"bad"`, `"neutral"` or `None`. |
 | `blind_metrics` | empty | an automatic score would influence the coder during open coding. A set of metric names to hide. |
 
-The details are in the docstrings of [src/rag_qualcode/adapters/base.py](../src/rag_qualcode/adapters/base.py). How signals become badges is in [schema.md](schema.md).
+The details are in the docstrings of [src/ragnostics/adapters/base.py](../src/ragnostics/adapters/base.py). How signals become badges is in [schema.md](schema.md).
 
 Things that go wrong often:
 
@@ -60,13 +60,13 @@ Things that go wrong often:
 - Retrieved versus cited: `RetrievalEvent.sources` holds everything the retrieval step returned. `Record.citations` holds the ids of the sources the answer cited. Do not merge the two.
 - `RetrievedSource.id` must match the keys `chunk_texts` returns, or the app falls back to the snippet.
 
-## Check it with `qualcode validate`
+## Check it with `ragnostics validate`
 
 ```bash
-qualcode validate my_project.yaml --show 3
+ragnostics validate my_project.yaml --show 3
 ```
 
-The command loads the project the same way the app does and exits with 0 when it found no problems, 1 otherwise. Counts, warnings and timings never change the exit code. With no project argument it uses `qualcode.yaml` in the current folder. `--traceback` adds the full Python traceback to adapter errors.
+The command loads the project the same way the app does and exits with 0 when it found no problems, 1 otherwise. Counts, warnings and timings never change the exit code. With no project argument it uses `ragnostics.yaml` in the current folder. `--traceback` adds the full Python traceback to adapter errors.
 
 **Problems** (exit code 1):
 
@@ -93,7 +93,7 @@ After the counts, the command prints the first `--show` records in full as JSON,
 
 ## Use the skill
 
-[skills/rag-qualcode-adapter/SKILL.md](../skills/rag-qualcode-adapter/SKILL.md) is an agent skill in the [Agent Skills](https://agentskills.io) format. It tells a coding agent to read a few log records, propose a mapping from log fields to record fields for you to confirm, write the adapter and the project file from the demo, and run `qualcode validate`. Point your agent at that file, or copy it into the skills folder of your agent. [AGENTS.md](../AGENTS.md) points agents that do not read skills to it.
+[skills/ragnostics-adapter/SKILL.md](../skills/ragnostics-adapter/SKILL.md) is an agent skill in the [Agent Skills](https://agentskills.io) format. It tells a coding agent to read a few log records, propose a mapping from log fields to record fields for you to confirm, write the adapter and the project file from the demo, and run `ragnostics validate`. Point your agent at that file, or copy it into the skills folder of your agent. [AGENTS.md](../AGENTS.md) points agents that do not read skills to it.
 
 The skill is experimental. Two cautions apply to every agent that does this work:
 
@@ -102,8 +102,8 @@ The skill is experimental. Two cautions apply to every agent that does this work
 
 ## The GRAINS adapter
 
-[src/rag_qualcode/adapters/grains.py](../src/rag_qualcode/adapters/grains.py) is the adapter for the system the tool was first built for: a RAG system with keyword search, vector search and knowledge-graph retrieval, whose logs are one results file plus one trace file per question. It is the full example. It loads traces lazily, reads full chunk texts from the traces, matches the ground-truth passage by text, and implements `trace_signals`, `signal_level` and `blind_metrics`. Read it after the demo adapter when you need those hooks. You need the GRAINS logs to run it. The keys it reads from `data:` are in its module docstring and in [qualcode.example.yaml](../qualcode.example.yaml).
+[src/ragnostics/adapters/grains.py](../src/ragnostics/adapters/grains.py) is the adapter for the system the tool was first built for: a RAG system with keyword search, vector search and knowledge-graph retrieval, whose logs are one results file plus one trace file per question. It is the full example. It loads traces lazily, reads full chunk texts from the traces, matches the ground-truth passage by text, and implements `trace_signals`, `signal_level` and `blind_metrics`. Read it after the demo adapter when you need those hooks. You need the GRAINS logs to run it. The keys it reads from `data:` are in its module docstring and in [ragnostics.example.yaml](../ragnostics.example.yaml).
 
 ## Public API and change policy
 
-The public API is `Record` and its parts, `Adapter` with its hooks and attributes, the keys of the project file, and the `qualcode` commands. Before version 1.0, a minor version (0.1 to 0.2) may change any of them. Every change is listed in [CHANGELOG.md](../CHANGELOG.md). New fields and hooks always get defaults, so an existing adapter keeps working when it does not use them.
+The public API is `Record` and its parts, `Adapter` with its hooks and attributes, the keys of the project file, and the `ragnostics` commands. Before version 1.0, a minor version (0.1 to 0.2) may change any of them. Every change is listed in [CHANGELOG.md](../CHANGELOG.md). New fields and hooks always get defaults, so an existing adapter keeps working when it does not use them.

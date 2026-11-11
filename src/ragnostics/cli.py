@@ -1,7 +1,7 @@
 """Console entry point.
 
-    qualcode [project.yaml] [--port N]                          start the GUI
-    qualcode validate [project.yaml] [--show N] [--traceback]   check an adapter
+    ragnostics [project.yaml] [--port N]                          start the GUI
+    ragnostics validate [project.yaml] [--show N] [--traceback]   check an adapter
 
 Wraps ``streamlit run`` so users don't need to know where the app module
 lives inside the installed package.
@@ -14,12 +14,12 @@ import os
 import sys
 from pathlib import Path
 
-_DEFAULT_PROJECT = "qualcode.yaml"
+_DEFAULT_PROJECT = "ragnostics.yaml"
 
 
 def _validate(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(
-        prog="qualcode validate",
+        prog="ragnostics validate",
         description="Load a project's adapter and check the records it produces.",
     )
     parser.add_argument("project", nargs="?", default=_DEFAULT_PROJECT)
@@ -49,14 +49,14 @@ def main() -> None:
         sys.exit(_validate(sys.argv[2:]))
 
     parser = argparse.ArgumentParser(
-        prog="qualcode",
+        prog="ragnostics",
         description="Qualitative failure-mode analysis for RAG systems.",
     )
     parser.add_argument(
         "project",
         nargs="?",
         default=_DEFAULT_PROJECT,
-        help="Path to the project YAML (default: ./qualcode.yaml)",
+        help="Path to the project YAML (default: ./ragnostics.yaml)",
     )
     parser.add_argument("--port", type=int, default=8501, help="Streamlit port")
     args = parser.parse_args()
@@ -68,7 +68,7 @@ def main() -> None:
     from streamlit.web import cli as stcli
 
     app = Path(__file__).parent / "app.py"
-    os.environ["QUALCODE_PROJECT"] = str(project)
+    os.environ["RAGNOSTICS_PROJECT"] = str(project)
     sys.argv = [
         "streamlit",
         "run",

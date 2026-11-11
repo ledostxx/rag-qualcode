@@ -1,7 +1,7 @@
 """Adapter interface.
 
 An adapter maps one system's raw benchmark logs into the canonical
-:class:`~rag_qualcode.schema.Record` list. Implement ``load()``; the other hooks
+:class:`~ragnostics.schema.Record` list. Implement ``load()``; the other hooks
 are optional and have defaults.
 """
 

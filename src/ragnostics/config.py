@@ -1,11 +1,11 @@
 """Project configuration.
 
-A qualcode project is a YAML file describing which adapter to use, where the
+A ragnostics project is a YAML file describing which adapter to use, where the
 benchmark data lives, and where annotations are stored. Relative paths are
 resolved against the config file's directory.
 
 The ``adapter`` value is kept as the raw string: a built-in name such as
-``grains``, or ``<file>.py:<ClassName>``, which ``rag_qualcode.adapters``
+``grains``, or ``<file>.py:<ClassName>``, which ``ragnostics.adapters``
 resolves against the project file's folder.
 
 The optional ``llm`` mapping is passed through. Keys the app reads: ``model``,
@@ -63,7 +63,7 @@ def load_project(path: str | Path) -> ProjectConfig:
     if not path.exists():
         raise FileNotFoundError(
             f"Project config not found: {path}\n"
-            "Create one from qualcode.example.yaml or pass a path: qualcode <config.yaml>"
+            "Create one from ragnostics.example.yaml or pass a path: ragnostics <config.yaml>"
         )
     with open(path, encoding="utf-8") as f:
         raw = yaml.safe_load(f) or {}

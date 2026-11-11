@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from rag_qualcode.adapters.base import Adapter
-from rag_qualcode.schema import Record
+from ragnostics.adapters.base import Adapter
+from ragnostics.schema import Record
 
 
 def _record(rid: str, **kw) -> Record:

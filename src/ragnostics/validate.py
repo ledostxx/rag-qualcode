@@ -1,4 +1,4 @@
-"""Checks behind ``qualcode validate``.
+"""Checks behind ``ragnostics validate``.
 
 Uses the same loading code as the GUI. Reports problems (exit code 1), warnings
 and counts that reveal a wrong field mapping, and prints a few records in full so
@@ -174,7 +174,7 @@ def _pct(count: int, total: int) -> str:
 
 
 def format_report(report: ValidationReport) -> str:
-    """Console output for ``qualcode validate``."""
+    """Console output for ``ragnostics validate``."""
     lines: list[str] = []
     if report.total:
         t = report.total

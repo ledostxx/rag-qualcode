@@ -1,6 +1,6 @@
-# rag-qualcode project configuration.
-# Copy to qualcode.yaml, adjust paths, then launch with:  qualcode
-# Check an adapter without starting the GUI:             qualcode validate
+# ragnostics project configuration.
+# Copy to ragnostics.yaml, adjust paths, then launch with:  ragnostics
+# Check an adapter without starting the GUI:             ragnostics validate
 # Relative paths are resolved against this file's directory.
 # Every key is explained in docs/project-file.md.
 #

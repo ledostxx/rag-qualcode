@@ -1,4 +1,4 @@
-"""Project, adapter and record loading shared by the app and ``qualcode validate``.
+"""Project, adapter and record loading shared by the app and ``ragnostics validate``.
 
 Deliberately free of Streamlit imports.
 """

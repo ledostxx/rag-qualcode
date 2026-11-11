@@ -10,7 +10,7 @@ from streamlit.testing.v1 import AppTest
 
 FIXTURES = Path(__file__).parent / "fixtures"
 REPO = Path(__file__).parent.parent
-APP = REPO / "src" / "rag_qualcode" / "app.py"
+APP = REPO / "src" / "ragnostics" / "app.py"
 DEMO = REPO / "examples" / "demo"
 
 
@@ -34,7 +34,7 @@ sample:
 
 
 def _boot(tmp_path, monkeypatch) -> AppTest:
-    monkeypatch.setenv("QUALCODE_PROJECT", str(_write_config(tmp_path)))
+    monkeypatch.setenv("RAGNOSTICS_PROJECT", str(_write_config(tmp_path)))
     at = AppTest.from_file(str(APP), default_timeout=30)
     at.run()
     assert not at.exception
@@ -62,7 +62,7 @@ def test_only_open_and_axial_phases_are_offered(tmp_path, monkeypatch):
 
 
 def test_shown_badges_come_from_the_adapter(tmp_path, monkeypatch):
-    from rag_qualcode.adapters import get_adapter
+    from ragnostics.adapters import get_adapter
 
     at = _boot(tmp_path, monkeypatch)
     adapter = get_adapter(

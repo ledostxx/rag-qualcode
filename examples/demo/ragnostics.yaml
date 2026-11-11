@@ -1,6 +1,6 @@
 # Demo project: 20 invented records. Run from the repository root:
-#   qualcode validate examples/demo/qualcode.yaml --show 3
-#   qualcode examples/demo/qualcode.yaml
+#   ragnostics validate examples/demo/ragnostics.yaml --show 3
+#   ragnostics examples/demo/ragnostics.yaml
 # Relative paths are resolved against this file's directory.
 name: demo
 adapter: ./demo_adapter.py:DemoAdapter
