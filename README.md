@@ -4,7 +4,7 @@ RAG + diagnostics: a Streamlit app for the qualitative failure analysis of RAG (
 
 You read benchmark traces one at a time and write down in your own words what went wrong (open coding). The app then sends your notes to an LLM, which proposes a set of failure categories (axial coding). You edit the categories, assign each note to one, and freeze the result as a codebook. The app does not read your system's logs directly: a small Python file, the adapter, translates your log format into a common record format.
 
-![Open coding view on the demo data](docs/images/open-coding.png)
+![Animated walkthrough of the open coding view on the demo data: drawing a stratified sample, comparing retrieved sources with the ground-truth chunk, paging through records with different evidence badges, writing a note and ticking No issues](docs/images/open-coding.gif)
 
 ## Try it
 
@@ -39,6 +39,40 @@ Axial coding calls an OpenAI-compatible chat API. Set `OPENAI_API_KEY` in the en
    ```
 
    The command exits with 0 when it finds no problems. It prints counts (for example how many records have no reference answer) and a few records in full, so you can compare them with the raw log.
+
+   Output on the demo project (the printed record is cut after 12 lines):
+
+   ```text
+   Counts
+     records:                    20
+     per source_type:            news: 10, paper: 10
+     empty system answer:        0 (0 %)
+     missing reference answer:   0 (0 %)
+     zero retrieval events:      0 (0 %)
+     with ground truth:          18 (90 %)
+     metric keys:                -
+     signal keys:                evidence
+     trace signal keys (shown records): Gold rank
+     hook timings:               load_trace 0 ms, chunk_texts 0 ms, trace_signals 0 ms
+
+   Records shown (1), compare them with the raw log:
+   --- record 1 ---
+   {
+     "id": "news-01",
+     "source_type": "news",
+     "question": "How many homes can the Selmere battery park supply, and for how long?",
+     "system_answer": "The Selmere battery park can supply roughly 18,000 homes for four hours.",
+     "reference_answer": "About 18,000 homes for four hours.",
+     "status": "success",
+     "retrieval_events": [
+       {
+         "channel": "retrieval",
+         "query": null,
+         "sources": [
+   …
+
+   OK: no problems found
+   ```
 4. Start the app: `ragnostics my_project.yaml`.
 
 An experimental agent skill can do steps 1 and 2 for you: [skills/ragnostics-adapter/SKILL.md](skills/ragnostics-adapter/SKILL.md). Point your coding agent at that file, or copy it into the skills folder of your agent. The agent reads your log files, so their content reaches your LLM provider. Read the adapter it writes before you run it. [AGENTS.md](AGENTS.md) points agents that do not read skills to the same file.
